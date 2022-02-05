@@ -5,6 +5,7 @@ inputs:
     description: 'Output target'
     required: true
   GITHUB_TOKEN:
+    description: 'GitHub token'
     required: true
   EXTRA_FILES:
     description: 'List of extra files to include in build'
@@ -26,4 +27,4 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/rust-build/rust-build.action:v1.2.6'
+  image: 'docker://ghcr.io/fcsonline/rust-build.action:v1.2.6-arm'

@@ -31,13 +31,13 @@ case ${RUSTTARGET} in
 
 "x86_64-unknown-linux-musl") ;;
 
-"x86_64-unknown-linux-gnu") 
+"x86_64-unknown-linux-gnu")
 error "x86_64-unknown-linux-gnu is not supported: please use x86_64-unknown-linux-musl for a statically linked c library"
 exit 1
 ;;
 
 "wasm32-wasi") ;;
-"wasm32-unknown-emscripten") 
+"wasm32-unknown-emscripten")
 mkdir -p /.cargo
 cat > /.cargo/config.toml << EOF
 [target.wasm32-unknown-emscripten]
@@ -58,6 +58,8 @@ linker = "/opt/osxcross/target/bin/x86_64-apple-darwin14-clang"
 ar = "/opt/osxcross/target/bin/x86_64-apple-darwin14-ar"
 EOF
 ;;
+
+"arm-unknown-linux-gnueabi") ;;
 
 *)
 error "${RUSTTARGET} is not supported"
@@ -92,12 +94,12 @@ for BINARY in $BINARIES; do
     error "Unable to find output"
     exit 1
   fi
-  
+
   # MINIFY set to false by default
   MINIFY=${MINIFY:-"false"}
   if [ "$MINIFY" = "true" ]; then
     info "Minifying ${OUTPUT}..."
-    
+
     info "Stripping..."
     strip "${OUTPUT}" >&2 || info "Strip failed."
     info "File stripped successfully."
